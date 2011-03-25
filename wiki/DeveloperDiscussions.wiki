@@ -26,6 +26,8 @@ Would be nice to enhance to get the doc from Javadoc info, or doclet API, etc. C
 
 There are some known issues, mostly minor, that could be fixed. But my limited Java expertise makes it harder or longer for me to fix them.
 
+See [RemoteServerDetails#Known_Issues] or the [http://code.google.com/p/jrobotremoteserver/issues/list Issues list] for details.
+
 = Interoperability or integration with existing Java libraries for Robot Framework =
 
 Might be nice to look into that to see if existing Robot Framework Java test libraries can be plugged in and work with this remote server. But I'm not a Java experts so I'll leave this to Robot users and (test library) developers.
