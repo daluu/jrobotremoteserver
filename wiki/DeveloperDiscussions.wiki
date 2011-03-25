@@ -8,6 +8,8 @@ I also did it in case I ever had a need in the future to use a remote library wi
 
 However, I'm more of a .NET developer than a Java developer, so my expertise in Java is limited. Given the large community of Java + open source developers, and that there is a Java user base and/or community around Robot Framework, I was hoping that the community may be able to help me enhance this project and fix current bugs it has.
 
+The project is hosted with Subversion, but if it makes any difference, upon request, I can port to Mercurial for possibly more community involvement.
+
 Below I outline areas that could be improved or fixed:
 
 = Compilation and software packaging for distribution =
