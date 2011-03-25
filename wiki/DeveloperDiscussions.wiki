@@ -1,0 +1,31 @@
+#summary Things to discuss with Java and open source developer community.
+
+= Introduction =
+
+I created the Java remote server for Robot Framework to learn a bit more about Java and as a challenge to myself, and as a port of my .NET version since they are similar. 
+
+I also did it in case I ever had a need in the future to use a remote library with Robot that had to be in Java and where a Jython bridge, even remotely might not suffice.
+
+However, I'm more of a .NET developer than a Java developer, so my expertise in Java is limited. Given the large community of Java + open source developers, and that there is a Java user base and/or community around Robot Framework, I was hoping that the community may be able to help me enhance this project and fix current bugs it has.
+
+Below I outline areas that could be improved or fixed:
+
+= Compilation and software packaging for distribution =
+
+The server is distributed as compiled class binaries. I wasn't able to package it as an executable JAR file. It had problems loading the entry point or its needed references. Perhaps someone can fix that for me and define the procedures for doing so for this server.
+
+Also, I'm not familiar with whether a class file compiled with one JDK version will run fine in another JRE/JVM version, particularly compiled on newer version, run on lower version or vice versa. If there are such issues, perhaps others can help me address this and/or compile for the other Java versions.
+
+= Keyword library documentation =
+
+The current implementation just (tries to) find any annotations for the Java class method and also returns info about the method's return type.
+
+Would be nice to enhance to get the doc from Javadoc info, or doclet API, etc. Currently, my .NET version is more feature rich in this area by reading from XML documentation (at runtime) that is generated as part of the code compilation process.
+
+= Known Issues =
+
+There are some known issues, mostly minor, that could be fixed. But my limited Java expertise makes it harder or longer for me to fix them.
+
+= Interoperability or integration with existing Java libraries for Robot Framework =
+
+Might be nice to look into that to see if existing Robot Framework Java test libraries can be plugged in and work with this remote server. But I'm not a Java experts so I'll leave this to Robot users and (test library) developers.
