@@ -70,6 +70,8 @@ And one might be able to use the Java libraries already built for Robot Framewor
 
   * remote library keywords will always return as PASS except for those that have return type as boolean and return false, and in case of exceptions
 
+  * no option to bind by IP address or hostname. Doesn't seem to be offered by the XML-RPC Java libraries I'm using.
+
 =Tips for Debugging=
 
   * You can use a REST client (like popular browser extensions) to pass correct [http://www.xmlrpc.com/spec XML-RPC] requests (an HTTP POST with data payload in XML-RPC format) and validate correct XML response from remote library.
