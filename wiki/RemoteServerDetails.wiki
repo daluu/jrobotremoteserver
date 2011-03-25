@@ -1,0 +1,77 @@
+#summary Installation, usage, and details for remote server
+
+<wiki:toc max_depth="3" />
+
+=Installation=
+
+==Prerequisites==
+
+  * [http://xmlrpc.sourceforge.net/ Redstone XML-RPC + Simple HTTP Server intgration JAR packages]
+  * Example Java remote library, bundled with the generic server, or your own Java remote (class) library, for use with [http://www.robotframework.org Robot Framework].
+  * If using with [http://www.robotframework.org Robot Framework] locally, running server on localhost, then need to install [http://www.robotframework.org Robot Framework].
+  * A Java compiler (JDK) and/or IDE (Eclipse IntelliJ Idea, Netbeans, etc.) if you wish to edit and compile the source and/or package it into a JAR.
+
+==Installation procedure==
+
+As the remote server acts as a remote library for [http://www.robotframework.org Robot Framework], no installation is needed. But the prerequisites have to be met first.
+
+  # Download [http://xmlrpc.sourceforge.net/ Redstone XML-RPC + Simple HTTP Server intgration JAR packages], if needed.
+  # Download the [http://jrobotremoteserver.googlecode.com/files/jrobotremoteserver-1.0_bin.zip generic remote server binary package], which already contains Redstone JAR files.
+  # Extract to desired location.
+  # Copy over [http://xmlrpc.sourceforge.net/ Redstone XML-RPC + Simple HTTP Server intgration JAR packages] to extracted location, if needed.
+
+You may add additional Java libraries (class or JAR files) in extracted location to start the remote server with those libraries instead of the provided example library.
+
+=Usage instructions=
+
+Run *robotremoteserver* passing it class path references to the [http://xmlrpc.sourceforge.net/ Redstone XML-RPC + Simple HTTP Server intgration JAR packages] and then the fully qualified name of Java class library that contains the implementation of keywords (e.g. actual remote library). You can also run server without arguments to get this usage info.
+
+Server also takes optional parameter for port to bind to, or it will default to the 8270.
+
+See [RemoteServerDetails#Testing_the_example_remote_library] for an example of usage.
+
+=Testing the example remote library=
+
+Run robotremoteserver with the examplelibrary like follows:
+
+  `java -cp .;xmlrpc-1.1.1.jar;simple-xmlrpc-1.0.jar;simple-4.0.1.jar org.robotframework.remotelibrary.RemoteServer org.robotframework.remotelibrary.ExampleRemoteLibrary`
+
+Then run the [http://robotframework.googlecode.com/svn/trunk/tools/remoteserver/example/remote_tests.html example tests] for remote libraries/servers available from [http://www.robotframework.org Robot Framework] project.
+
+=Java remote library interface with the generic remote server=
+
+The generic remote server uses Java reflection to access the actual remote library during runtime. Alternatively, you may wish to integrate the library code into the remote server and make it non-generic rather than use reflection/dynamic loading.
+
+The remote server includes keyword *stop_remote_server* so you don't have to implement that in the remote library. Except there is currently a bug with it in terms of Robot Framework integration ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=1 Issue 1]).
+
+Remote library methods should conform to [http://www.robotframework.org Robot Framework] keyword API specification, meaning: methods should be named as *method_name()* rather than !MethodName() or methodName(); the underscore represents a space; the method is made available as a keyword in [http://www.robotframework.org Robot Framework] named *Method Name*. Alternatively, they might not have to follow this convention, but you would have to modify the remote server to be able to translate the Robot Framework keyword naming convention to the actual Java method naming convention when XML-RPC calls are made to *run_keyword*.
+
+Additionally, the library's use of data types in keyword arguments or return values should conform to the [http://www.xmlrpc.com/spec XML-RPC] protocol and what is supported by [http://www.robotframework.org Robot Framework].
+
+==Designing new custom test libraries in Java==
+
+For this case, you need only follow the Java remote library interface guidelines when creating your test library for it to be callable from [http://www.robotframework.org Robot Framework].
+
+==Re-using existing .NET libraries for Robot Framework==
+
+For this case, you would need to write a wrapper class library that provides the remote library interface on the front end and makes the actual calls to the desired Java code/class (or web service) on the back end, for it to be callable from [http://www.robotframework.org Robot Framework].
+
+And one might be able to use the Java libraries already built for Robot Framework. They may work under this remote server as a remote library as well. See [http://code.google.com/p/robotframework/wiki/TestLibraries Robot Framework Test Libraries page] for possible Java libraries that can be used here.
+
+=Known Issues=
+
+  * Stop Remote Server keyword not recognized by Robot Framework. ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=1 Issue 1])
+
+  * Wrong exception when exception thrown for !ExampleRemoteLibrary ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=2 Issue 2])
+
+  * keyword output will always be blank except in cases of exceptions being raised. Currently no real definition of what constitutes "output" from a keyword. ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=3 Issue 3])
+
+  * remote library keywords will always return as PASS except for those that have return type as boolean and return false, and in case of exceptions
+
+=Tips for Debugging=
+
+  * You can use a REST client (like popular browser extensions) to pass correct [http://www.xmlrpc.com/spec XML-RPC] requests (an HTTP POST with data payload in XML-RPC format) and validate correct XML response from remote library.
+
+  * You can use [http://www.robotframework.org Robot Framework] tests to make the XML-RPC calls and validate correct responses, etc. if you are not good with XML-RPC messaging.
+
+  * For Java class library related issues, you can build other Java apps to load the same library being used with remote server, or implement a main method to the class library and test to make sure library works correctly before loading into server at runtime.
