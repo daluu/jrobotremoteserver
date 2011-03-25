@@ -66,6 +66,8 @@ And one might be able to use the Java libraries already built for Robot Framewor
 
   * keyword output will always be blank except in cases of exceptions being raised. Currently no real definition of what constitutes "output" from a keyword. ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=3 Issue 3])
 
+  * Get keyword arguments returns argument data type but not name ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=4 Issue 4])
+
   * remote library keywords will always return as PASS except for those that have return type as boolean and return false, and in case of exceptions
 
 =Tips for Debugging=
