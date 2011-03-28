@@ -35,13 +35,40 @@ public class ExampleRemoteLibrary {
 	 * @throws Exception indicating string comparison failed, they are not equal. 
 	 */
 	public static void strings_should_be_equal(String str1, String str2) throws Exception{
-		System.out.printf("Comparing '%s' to '%s'", str1, str2);
+		System.out.printf("Comparing '%s' to '%s'\n", str1, str2);
 		if(!str1.equals(str2)){
-			System.out.println("Somehow when executed by remote server as remote library,");
-			System.out.println("we get null pointer exception here instead of what's below.");
-			//or is my knowledge of Java incomplete and the string comparison is incorrect?
+			//System.out.println("Somehow when executed by remote server as remote library,");
+			//System.out.println("we get null pointer exception here instead of");
+			//System.out.println("'Given strings are not equal' generic exception.");
+			//System.out.println("Possibly an issue with Java reflection call.");
 			Exception ex = new Exception("Given strings are not equal");
 			throw ex;
 		}
+	}
+	
+	/**
+	 * Self test for Example Remote Library,
+	 * utilizing similar tests as Robot Framework 
+	 * remote library test example.
+	 * @param args
+	 */
+	public static void main(String[] args){
+		int currDirItemCount, TmpDirItemCount;
+		currDirItemCount = count_items_in_directory(System.getProperty("user.dir"));
+		TmpDirItemCount = count_items_in_directory(System.getProperty("java.io.tmpdir"));
+		System.out.println("");
+		System.out.printf("There are %d items in '%s' and %d items in '%s'.\n\n",currDirItemCount,System.getProperty("user.dir"),TmpDirItemCount,System.getProperty("java.io.tmpdir"));
+		System.out.println("Testing 'strings_should_be_equal' pass case:");
+		try{
+			strings_should_be_equal("Hello","Hello");
+		}catch (Throwable e){
+			System.out.println("Exception occurred where it shouldn't. Weird.");
+		}
+		System.out.println("Testing 'strings_should_be_equal' fail case:");
+		try{
+			strings_should_be_equal("not","equal");
+		}catch (Throwable e){
+			System.out.println("Exception caught: " + e.getMessage());
+		}			
 	}
 }
