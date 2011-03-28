@@ -75,16 +75,25 @@ public class RemoteServerMethods {
 		HashMap kr = new HashMap();
 		try {
 			if(keyword.equalsIgnoreCase("stop_remote_server")){
-				//spawn new thread to do a delayed server shutdown
-				//and return XML-RPC response before delay is over
-				Shutdown sd = new Shutdown(); //special class to do shutdown
-				Thread stop = new Thread(sd);
-				stop.start();
+				//set return value
 				kr.put("status", "PASS"); //RobotFramework spec for shutdown
 				kr.put("return", 1);
 				kr.put("error","");
-				kr.put("output","");
 				kr.put("traceback","");
+
+				if(RemoteServer.enableStopServer){
+					//spawn new thread to do a delayed server shutdown
+					//and return XML-RPC response before delay is up
+					Shutdown sd = new Shutdown(); //special class to do shutdown
+					Thread stop = new Thread(sd);
+					stop.start();
+					kr.put("output","NOTE: remote server will shut down in 1 minute.");
+				}else{
+					kr.put("output","NOTE: remote server not configured to allow remote shutdowns. Your request has been ignored.");
+					//in case RF spec changes to report failure in this case in future
+					//kr.put("status", "FAIL");
+					//kr.put("error","Remote server not configured to allow remote shutdowns. Your request has been ignored.");
+				}
 				return kr;
 			}
 			Class cls = Class.forName(RemoteServer.className);
@@ -155,10 +164,13 @@ public class RemoteServerMethods {
 		
 		//my knowledge of Java reflection is limited,
 		//so for now, we do this...
+		if(keyword.equalsIgnoreCase("stop_remote_server")){
+			return new String[0];
+		}
 		try {			
 			Class cls = Class.forName(RemoteServer.className);
 			Method methlist[] = cls.getDeclaredMethods();
-			String[] args = null;
+			String[] args = new String[0];
 			for (int i = 0; i < methlist.length; i++) {  
 				Method m = methlist[i];
 				if(m.getName().equalsIgnoreCase(keyword)){
@@ -173,7 +185,7 @@ public class RemoteServerMethods {
 		}
 		catch (Throwable e) {
 			System.err.println(e);
-			return null;
+			return new String[0];
 		}
 	}
 	
@@ -199,8 +211,11 @@ public class RemoteServerMethods {
 		//my knowledge of Java reflection +
 		//Java documentation is limited,
 		//so for now, we do this...
+		if(keyword.equalsIgnoreCase("stop_remote_server")){
+			return "";
+		}
 		try {
-			String doc = null;
+			String doc = "";
 			Class cls = Class.forName(RemoteServer.className);
 			Method methlist[] = cls.getDeclaredMethods();
 			for (int i = 0; i < methlist.length; i++) {  
@@ -218,7 +233,7 @@ public class RemoteServerMethods {
 		}
 		catch (Throwable e) {
 			System.err.println(e);
-			return null;
+			return "";
 		}
 	}
 }
