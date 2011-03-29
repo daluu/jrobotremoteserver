@@ -52,7 +52,7 @@ Additionally, the library's use of data types in keyword arguments or return val
 
 For this case, you need only follow the Java remote library interface guidelines when creating your test library for it to be callable from [http://www.robotframework.org Robot Framework].
 
-==Re-using existing .NET libraries for Robot Framework==
+==Re-using existing Java libraries for Robot Framework==
 
 For this case, you would need to write a wrapper class library that provides the remote library interface on the front end and makes the actual calls to the desired Java code/class (or web service) on the back end, for it to be callable from [http://www.robotframework.org Robot Framework].
 
