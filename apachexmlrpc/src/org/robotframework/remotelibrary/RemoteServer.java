@@ -45,6 +45,7 @@ import org.apache.xmlrpc.webserver.WebServer;
 public class RemoteServer {
 	
 	public static String className;
+	public static boolean enableStopServer;
 
 	/** 
 	 * Remote Server main/startup method.
@@ -58,10 +59,20 @@ public class RemoteServer {
 		if(args.length == 0)
 			displayUsage();
 		
-		int port = 8270; //default
-		className = args[0];
-		if(args.length == 2)
-			port = Integer.parseInt(args[1]);
+		//set defaults
+		int port = 8270;
+		className = "org.robotframework.remotelibrary.ExampleRemoteLibrary";
+		enableStopServer = true;
+
+		//parse arguments
+		for(int i = 0; i < args.length; i++){
+			if(args[i].equalsIgnoreCase("--library"))
+				className = args[i+1];
+			if(args[i].equalsIgnoreCase("--port"))
+				port = Integer.parseInt(args[i+1]);
+			if(args[i].equalsIgnoreCase("--nostopsvr"))
+				enableStopServer = false;
+		}
 		
 		//the code blocks below are based on 
 		//Apache library examples at
@@ -105,12 +116,12 @@ public class RemoteServer {
 		System.out.println("");
 		System.out.println("Usage Info:");
 		System.out.println("");
-		System.out.println("  java -cp xmlrpc-common-3.1.3.jar:xmlrpc-server-3.1.3.jar:ws-commons-util-1.0.2.jar:commons-logging-1.1.jar org.robotframework.remotelibrary.RemoteServer RemoteLibraryClassName-FullyQualifiedPath [port]");
+		System.out.println("  java -cp xmlrpc-common-3.1.3.jar:xmlrpc-server-3.1.3.jar:ws-commons-util-1.0.2.jar:commons-logging-1.1.jar org.robotframework.remotelibrary.RemoteServer --library RemoteLibraryClassName-FullyQualifiedPath [options]");
 		System.out.println("");
 		System.out.println("  Class name = keyword class w/ methods to execute, fully qualified path");
 		System.out.println("  including package name, as needed. Assumes class library (class/JAR");
 		System.out.println("  file) is in class path for loading & invocation. As shown, server");
-		System.out.println("  requires Apache XML-RPC library.");
+		System.out.println("  requires Redstone XML-RPC w/ Simple HTTP Server (JAR) libraries.");
 		//comment out doc file info, until/unless we implement where some Javadoc file is required
 		//System.out.println("  Documentation file = Java documentation file for the");
 		//System.out.println("    class library.");
@@ -118,14 +129,19 @@ public class RemoteServer {
 		//commented out info about hostname/IP until we implement that, if ever
 		//System.out.println("  Optionally specify IP address to bind remote server to.");
 		//System.out.println("    Default of 127.0.0.1 (localhost).");
-		System.out.println("  Optionally specify port to bind remote server to. Default of 8270.");
+		System.out.println("Optional options:");
+		System.out.println("");
+		System.out.println("  --port value\tPort to bind remote server to. Default of 8270.");
+		System.out.println("");
+		System.out.println("  --nostopsvr\tDisable remotely stopping the server via stop_remote_server");
+		System.out.println("             \tkeyword. Default is to enable.");
 		System.out.println("");
 		System.out.println("  NOTE: Would be nice if someone could build a working JAR version of server,");
 		System.out.println("  so you don't have to execute from class files. I can't seem to do it myself.");
 		System.out.println("");
 		System.out.println("Example:");
 		System.out.println("");
-		System.out.println("  java -cp xmlrpc-common-3.1.3.jar:xmlrpc-server-3.1.3.jar:ws-commons-util-1.0.2.jar:commons-logging-1.1.jar org.robotframework.remotelibrary.RemoteServer org.robotframework.remotelibrary.MyClassName 81");
+		System.out.println("  java -cp xmlrpc-common-3.1.3.jar:xmlrpc-server-3.1.3.jar:ws-commons-util-1.0.2.jar:commons-logging-1.1.jar org.robotframework.remotelibrary.RemoteServer --library org.robotframework.remotelibrary.MyClassName --port 81 --nostopsvr");
 		System.exit(0);
 	}
 }
