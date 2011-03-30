@@ -87,7 +87,7 @@ public class RemoteServerMethods {
 					Shutdown sd = new Shutdown(); //special class to do shutdown
 					Thread stop = new Thread(sd);
 					stop.start();
-					kr.put("output","NOTE: remote server will shut down in 1 minute.");
+					kr.put("output","NOTE: remote server shutting/shut down.");
 				}else{
 					kr.put("output","NOTE: remote server not configured to allow remote shutdowns. Your request has been ignored.");
 					//in case RF spec changes to report failure in this case in future
@@ -212,7 +212,10 @@ public class RemoteServerMethods {
 		//Java documentation is limited,
 		//so for now, we do this...
 		if(keyword.equalsIgnoreCase("stop_remote_server")){
-			return "";
+			String doc = "Remotely shut down remote server/library w/ Robot Framework keyword.\n\n";
+			doc += "If server is configured to not allow remote shutdown, keyword 'request' is ignored by server.\n\n";
+			doc += "Always returns status of PASS with return value of 1. Output value contains helpful info and may indicate whether remote shut down is allowed or not.";
+			return doc;
 		}
 		try {
 			String doc = "";

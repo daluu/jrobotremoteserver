@@ -37,10 +37,6 @@ public class ExampleRemoteLibrary {
 	public static void strings_should_be_equal(String str1, String str2) throws Exception{
 		System.out.printf("Comparing '%s' to '%s'\n", str1, str2);
 		if(!str1.equals(str2)){
-			//System.out.println("Somehow when executed by remote server as remote library,");
-			//System.out.println("we get null pointer exception here instead of");
-			//System.out.println("'Given strings are not equal' generic exception.");
-			//System.out.println("Possibly an issue with Java reflection call.");
 			Exception ex = new Exception("Given strings are not equal");
 			throw ex;
 		}
@@ -57,6 +53,9 @@ public class ExampleRemoteLibrary {
 		currDirItemCount = count_items_in_directory(System.getProperty("user.dir"));
 		TmpDirItemCount = count_items_in_directory(System.getProperty("java.io.tmpdir"));
 		System.out.println("");
+		System.out.println("The following are same tests as Robot Framework example");
+		System.out.println("remote library tests, only executed locally within Java instead.");
+		System.out.println("");
 		System.out.printf("There are %d items in '%s' and %d items in '%s'.\n\n",currDirItemCount,System.getProperty("user.dir"),TmpDirItemCount,System.getProperty("java.io.tmpdir"));
 		System.out.println("Testing 'strings_should_be_equal' pass case:");
 		try{
@@ -68,7 +67,7 @@ public class ExampleRemoteLibrary {
 		try{
 			strings_should_be_equal("not","equal");
 		}catch (Throwable e){
-			System.out.println("Exception caught: " + e.getMessage());
+			System.out.println("Expected failure/exception caught: " + e.getMessage());
 		}			
 	}
 }

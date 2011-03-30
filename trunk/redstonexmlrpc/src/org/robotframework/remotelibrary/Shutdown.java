@@ -35,14 +35,14 @@ import java.util.Date;
 public class Shutdown implements Runnable {
 	private int delay;
 	public Shutdown(){ //default
-		delay = 60000; //let's arbitrarily set delay at 1 minute
+		delay = 5000; //let's arbitrarily set delay at 5 seconds
 	}
 	public Shutdown(int pDelay){
 		delay = pDelay;
 	}
 	public void run(){
 		try {
-			System.out.println("Shutting down remote server/library, from Robot Framework/XML-RPC request, in 1 minute.");
+			System.out.printf("Shutting down remote server/library, from Robot Framework/XML-RPC request, in %d milliseconds.\n",delay);
 			Thread.sleep(delay);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
