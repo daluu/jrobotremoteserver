@@ -34,17 +34,26 @@ See [RemoteServerDetails#Testing_the_example_remote_library] for an example of u
 
 Run robotremoteserver with the examplelibrary like follows:
 
-  `java -cp .;xmlrpc-1.1.1.jar;simple-xmlrpc-1.0.jar;simple-4.0.1.jar org.robotframework.remotelibrary.RemoteServer org.robotframework.remotelibrary.ExampleRemoteLibrary`
+  `java -cp .;xmlrpc-1.1.1.jar;simple-xmlrpc-1.0.jar;simple-4.0.1.jar org.robotframework.remotelibrary.RemoteServer`
+
+  `--library org.robotframework.remotelibrary.ExampleRemoteLibrary`
 
 Then run the [http://robotframework.googlecode.com/svn/trunk/tools/remoteserver/example/remote_tests.html example tests] for remote libraries/servers available from [http://www.robotframework.org Robot Framework] project.
+
+To test stop remote server functionality, you may wish to add a test case, test step, or test case/suite teardown like this:
+
+|| Test Case || Action || Argument ||
+|| Stop Server Test || Run Keyword || Stop Remote Server ||
 
 =Java remote library interface with the generic remote server=
 
 The generic remote server uses Java reflection to access the actual remote library during runtime. Alternatively, you may wish to integrate the library code into the remote server and make it non-generic rather than use reflection/dynamic loading.
 
-The remote server includes keyword *stop_remote_server* so you don't have to implement that in the remote library. Except there is currently a bug with it in terms of Robot Framework integration ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=1 Issue 1]).
+The remote server includes keyword *stop_remote_server* so you don't have to implement that in the remote library.
 
 Remote library methods should conform to [http://www.robotframework.org Robot Framework] keyword API specification, meaning: methods should be named as *method_name()* rather than !MethodName() or methodName(); the underscore represents a space; the method is made available as a keyword in [http://www.robotframework.org Robot Framework] named *Method Name*. Alternatively, they might not have to follow this convention, but you would have to modify the remote server to be able to translate the Robot Framework keyword naming convention to the actual Java method naming convention when XML-RPC calls are made to *run_keyword*.
+
+*NOTE:* the remote server currently does not implement or use the !JavaLibCore library package for Robot Framework, therefore, you can't build Java test libraries for the remote server that way. You can only build them following the Robot Framework simple test library and Java reflection methods. See ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=7 Issue 7]) for details.
 
 Additionally, the library's use of data types in keyword arguments or return values should conform to the [http://www.xmlrpc.com/spec XML-RPC] protocol and what is supported by [http://www.robotframework.org Robot Framework].
 
@@ -52,15 +61,17 @@ Additionally, the library's use of data types in keyword arguments or return val
 
 For this case, you need only follow the Java remote library interface guidelines when creating your test library for it to be callable from [http://www.robotframework.org Robot Framework].
 
+*NOTE:* the remote server currently does not implement or use the !JavaLibCore library package for Robot Framework, therefore, you can't build Java test libraries for the remote server that way. You can only build them following the Robot Framework simple test library and Java reflection methods. See ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=7 Issue 7]) for details.
+
 ==Re-using existing Java libraries for Robot Framework==
 
 For this case, you would need to write a wrapper class library that provides the remote library interface on the front end and makes the actual calls to the desired Java code/class (or web service) on the back end, for it to be callable from [http://www.robotframework.org Robot Framework].
 
-And one might be able to use the Java libraries already built for Robot Framework. They may work under this remote server as a remote library as well. See [http://code.google.com/p/robotframework/wiki/TestLibraries Robot Framework Test Libraries page] for possible Java libraries that can be used here.
+And one might be able to use the Java libraries already built for Robot Framework. They may work under this remote server as a remote library as well. See [http://code.google.com/p/robotframework/wiki/TestLibraries Robot Framework Test Libraries page] for possible Java libraries that can be used here. But see following note...
+
+*NOTE:* The remote server currently does not implement or use the !JavaLibCore library package for Robot Framework, therefore, you can't use Java test libraries build that way with the remote server. One such example is the [http://code.google.com/p/robotframework-swinglibrary/ SwingLibrary]. See ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=7 Issue 7]) for details.
 
 =Known Issues=
-
-  * Stop Remote Server keyword not recognized by Robot Framework. ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=1 Issue 1])
 
   * Wrong exception when exception thrown for !ExampleRemoteLibrary ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=2 Issue 2])
 
