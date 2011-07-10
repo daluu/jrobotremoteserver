@@ -24,6 +24,8 @@ The current implementation just (tries to) find any annotations for the Java cla
 
 Would be nice to enhance to get the doc from Javadoc info, or doclet API, etc. Currently, my .NET version is more feature rich in this area by reading from XML documentation (at runtime) that is generated as part of the code compilation process.
 
+Do note that the annotation functionality likely doesn't work the same as the Robot Framework native Java library integration. So changes need to be made in this area if one desires the same functionality for Java remote server libraries. Unfortunately, I'm no Robot Framework or Java expert here, so this is where developer community assistance would be appreciated.
+
 = Known Issues =
 
 There are some known issues, mostly minor, that could be fixed. But my limited Java expertise makes it harder or longer for me to fix them.
