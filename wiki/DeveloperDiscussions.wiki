@@ -34,4 +34,4 @@ See [RemoteServerDetails#Known_Issues] or the [http://code.google.com/p/jrobotre
 
 = Interoperability or integration with existing Java libraries for Robot Framework =
 
-Might be nice to look into that to see if existing Robot Framework Java test libraries can be plugged in and work with this remote server. But I'm not a Java expert so I'll leave this to Robot users and (test library) developers.
+Might be nice to look into that to see if existing Robot Framework Java test libraries can be plugged in and work with this remote server. Unfortunately, I'm no Robot Framework or Java expert here, so this is where developer community assistance would be appreciated.
