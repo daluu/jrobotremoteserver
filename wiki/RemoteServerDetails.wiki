@@ -83,6 +83,8 @@ And one might be able to use the Java libraries already built for Robot Framewor
 
   * no option to bind by IP address or hostname. Doesn't seem to be offered by the XML-RPC Java libraries I'm using.
 
+  * keyword documentation retrieval attempts to get from annotations and via Java reflection to get return type, etc. but it likely doesn't work the same way as Robot Framework's native Java library integration method. So changes need to be made in this area if one desires the same functionality for Java remote server libraries. See DeveloperDiscussions#Keyword_library_documentation for details.
+
 =Tips for Debugging=
 
   * You can use a REST client (like popular browser extensions) to pass correct [http://www.xmlrpc.com/spec XML-RPC] requests (an HTTP POST with data payload in XML-RPC format) and validate correct XML response from remote library.
