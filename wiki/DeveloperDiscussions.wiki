@@ -4,7 +4,7 @@
 
 I created the Java remote server for Robot Framework to learn a bit more about Java and as a challenge to myself, and as a port of my .NET version since they are similar. 
 
-I also did it in case I ever had a need in the future to use a remote library with Robot that had to be in Java and where a Jython bridge, even remotely might not suffice.
+I also did it in case I ever had a need in the future to use a remote library with Robot Framework that had to be in Java and where a Jython bridge, even remotely might not suffice.
 
 However, I'm more of a .NET developer than a Java developer, so my expertise in Java is limited. Given the large community of Java + open source developers, and that there is a Java user base and/or community around Robot Framework, I was hoping that the community may be able to help me enhance this project and fix current bugs it has.
 
@@ -32,4 +32,4 @@ See [RemoteServerDetails#Known_Issues] or the [http://code.google.com/p/jrobotre
 
 = Interoperability or integration with existing Java libraries for Robot Framework =
 
-Might be nice to look into that to see if existing Robot Framework Java test libraries can be plugged in and work with this remote server. But I'm not a Java experts so I'll leave this to Robot users and (test library) developers.
+Might be nice to look into that to see if existing Robot Framework Java test libraries can be plugged in and work with this remote server. But I'm not a Java expert so I'll leave this to Robot users and (test library) developers.
