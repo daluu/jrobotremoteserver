@@ -38,6 +38,10 @@ Run robotremoteserver with the examplelibrary like follows:
 
   `--library org.robotframework.remotelibrary.ExampleRemoteLibrary`
 
+or if using the JAR version:
+
+  `java -jar jrobotremoteserver-1.0.jar --library org.robotframework.remotelibrary.ExampleRemoteLibrary`
+
 Then run the [http://robotframework.googlecode.com/svn/trunk/tools/remoteserver/example/remote_tests.html example tests] for remote libraries/servers available from [http://www.robotframework.org Robot Framework] project.
 
 To test stop remote server functionality, you may wish to add a test case, test step, or test case/suite teardown like this:
