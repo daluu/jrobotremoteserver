@@ -14,7 +14,7 @@ Below I outline areas that could be improved or fixed:
 
 = Compilation and software packaging for distribution =
 
-The server is distributed as compiled class binaries. I wasn't able to package it as an executable JAR file. It had problems loading the entry point or its needed references. Perhaps someone can fix that for me and define the procedures for doing so for this server.
+~~The server is distributed as compiled class binaries. I wasn't able to package it as an executable JAR file. It had problems loading the entry point or its needed references. Perhaps someone can fix that for me and define the procedures for doing so for this server.~~
 
 Also, I'm not familiar with whether a class file compiled with one JDK version will run fine in another JRE/JVM version, particularly compiled on newer version, run on lower version or vice versa. If there are such issues, perhaps others can help me address this and/or compile for the other Java versions.
 
