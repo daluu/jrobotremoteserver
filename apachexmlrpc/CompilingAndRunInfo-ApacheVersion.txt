@@ -1,8 +1,14 @@
-//how to compile
+// NOTE: This branch will no longer be updated unless there is community demand for 
+// using the Apache XML-RPC library instead of Redstone. Whatever new changes in Redstone
+// branch that may apply to Apache as well can be manually backported by the user as needed.
+// What is available in this branch is enough as a starting base on how to build the server
+// with this version of XML-RPC library.
+
+// how to compile
 javac -cp xmlrpc-common-3.1.3.jar:xmlrpc-server-3.1.3.jar:ws-commons-util-1.0.2.jar:commons-logging-1.1.jar -d bin src/org/robotframework/remotelibrary/*.java
 
-//how to run
+// how to run
 java -cp xmlrpc-common-3.1.3.jar:xmlrpc-server-3.1.3.jar:ws-commons-util-1.0.2.jar:commons-logging-1.1.jar org.robotframework.remotelibrary.RemoteServer --library org.robotframework.remotelibrary.ExampleRemoteLibrary
 
-//how to make working executable JAR?
+// how to make working executable JAR?
 jar -cvfe robotremoteserver.jar org.robotframework.remotelibrary.RemoteServer bin/org/robotframework/remotelibrary/*.class
