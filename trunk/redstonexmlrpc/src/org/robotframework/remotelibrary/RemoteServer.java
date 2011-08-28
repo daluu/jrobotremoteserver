@@ -107,6 +107,10 @@ public class RemoteServer {
 		System.out.println("");
 		System.out.println("  java -cp xmlrpc-1.1.1.jar:simple-4.0.1.jar:simple-xmlrpc-1.0.jar org.robotframework.remotelibrary.RemoteServer --library RemoteLibraryClassName-FullyQualifiedPath [options]");
 		System.out.println("");
+		System.out.println("  or if everything packaged into a JAR...");
+		System.out.println("");
+		System.out.println("  java -jar jrobotremoteserver-1.0.jar --library RemoteLibraryClassName-FullyQualifiedPath [options]");
+		System.out.println("");
 		System.out.println("  Class name = keyword class w/ methods to execute, fully qualified path");
 		System.out.println("  including package name, as needed. Assumes class library (class/JAR");
 		System.out.println("  file) is in class path for loading & invocation. As shown, server");
@@ -125,12 +129,14 @@ public class RemoteServer {
 		System.out.println("  --nostopsvr\tDisable remotely stopping the server via stop_remote_server");
 		System.out.println("             \tkeyword. Default is to enable.");
 		System.out.println("");
-		System.out.println("  NOTE: Would be nice if someone could build a working JAR version of server,");
-		System.out.println("  so you don't have to execute from class files. I can't seem to do it myself.");
-		System.out.println("");
 		System.out.println("Example:");
 		System.out.println("");
 		System.out.println("  java -cp xmlrpc-1.1.1.jar:simple-4.0.1.jar:simple-xmlrpc-1.0.jar org.robotframework.remotelibrary.RemoteServer --library org.robotframework.remotelibrary.MyClassName --port 81 --nostopsvr");
+		System.out.println("");
+		System.out.println("  or if everything packaged into a JAR...");
+		System.out.println("");
+		System.out.println("  java -jar jrobotremoteserver-1.0.jar --library org.robotframework.remotelibrary.MyClassName --port 81 --nostopsvr");
+		System.out.println("");
 		System.exit(0);
 	}
 }
