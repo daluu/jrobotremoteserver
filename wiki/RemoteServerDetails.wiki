@@ -16,7 +16,7 @@
 As the remote server acts as a remote library for [http://www.robotframework.org Robot Framework], no installation is needed. But the prerequisites have to be met first.
 
   # Download [http://xmlrpc.sourceforge.net/ Redstone XML-RPC + Simple HTTP Server intgration JAR packages], if needed.
-  # Download the [http://jrobotremoteserver.googlecode.com/files/jrobotremoteserver-1.0r1_bin.zip generic remote server binary package], which already contains Redstone JAR files.
+  # Download the [http://jrobotremoteserver.googlecode.com/files/jrobotremoteserver-1.0r1.zip generic remote server binary package], which already contains Redstone JAR files.
   # Extract to desired location.
   # Copy over [http://xmlrpc.sourceforge.net/ Redstone XML-RPC + Simple HTTP Server intgration JAR packages] to extracted location, if needed.
 
