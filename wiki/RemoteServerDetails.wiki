@@ -77,6 +77,34 @@ And one might be able to use the Java libraries already built for Robot Framewor
 
 *NOTE:* The remote server currently does not implement or use the !JavaLibCore library package for Robot Framework, therefore, you can't use Java test libraries build that way with the remote server. One such example is the [http://code.google.com/p/robotframework-swinglibrary/ SwingLibrary]. See ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=7 Issue 7]) for details.
 
+==Packaging test libraries with the remote server together==
+
+You can just archive/zip up the needed class files and JARs, or you can bundle everything into a single JAR for easy distribution and execution. Here are the steps, thanks to user bocadillodeatun.
+
+ `# Extract the original package and/or navigate to bin folder`
+
+  `unzip jrobotremoteserver-1.0_bin.zip`
+
+  `cd bin`
+  
+  `# add your test libraries within this bin folder structure if not already`
+
+  `# Extract the bundled jars`
+
+  `jar xf simple-4.0.1.jar`
+
+  `jar xf simple-xmlrpc-1.0.jar`
+
+  `jar xf xmlrpc-1.1.1.jar`
+  
+  `# Create the new jar containing everything`
+
+  `jar cvfe jrobotremoteserver-1.0.jar org/robotframework/remotelibrary/RemoteServer org/ redstone/`
+  
+  `# Now can execute the newly created jar as follows...`
+
+  `java -jar jrobotremoteserver-1.0.jar --library org.robotframework.remotelibrary.ExampleRemoteLibrary`
+
 =Known Issues=
 
   * Wrong exception when exception thrown for !ExampleRemoteLibrary ([http://code.google.com/p/jrobotremoteserver/issues/detail?id=2 Issue 2])
