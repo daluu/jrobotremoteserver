@@ -1,8 +1,17 @@
-//how to compile
+// how to compile
 javac -cp xmlrpc-1.1.1.jar:simple-4.0.1.jar:simple-xmlrpc-1.0.jar -d bin src/org/robotframework/remotelibrary/*.java
 
-//how to run
+// how to run
 java -cp xmlrpc-1.1.1.jar:simple-4.0.1.jar:simple-xmlrpc-1.0.jar org.robotframework.remotelibrary.RemoteServer --library org.robotframework.remotelibrary.ExampleRemoteLibrary
 
-//how to make working executable JAR?
-jar -cvfe robotremoteserver.jar org.robotframework.remotelibrary.RemoteServer bin/org/robotframework/remotelibrary/*.class
+// how to make working executable JAR...
+// assuming you have the XML-RPC JARs in the bin folder,
+jar xf simple-4.0.1.jar
+jar xf simple-xmlrpc-1.0.jar
+jar xf xmlrpc-1.1.1.jar
+
+// repackage everything together into a single JAR
+jar cvfe jrobotremoteserver-1.0.jar org/robotframework/remotelibrary/RemoteServer org/ redstone/
+
+// how to run as JAR
+java -jar jrobotremoteserver-1.0.jar --library org.robotframework.remotelibrary.ExampleRemoteLibrary
