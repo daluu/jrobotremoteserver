@@ -10,6 +10,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/* NOTE: Recommended that you go to 
+ * https://github.com/ombre42/jrobotremoteserver 
+ * to get the latest release that uses Apache XML-RPC. Otherwise,
+ * feel free to use the code here.
+ */
+
 package org.robotframework.remotelibrary;
 
 import java.net.InetAddress;

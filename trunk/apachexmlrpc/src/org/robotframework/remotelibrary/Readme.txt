@@ -1,3 +1,5 @@
+NOTE: Recommended that you go to https://github.com/ombre42/jrobotremoteserver to get the latest release that uses Apache XML-RPC. Otherwise, read on...
+
 Rather than duplicate copies of source code in multiple locations, the rest of the code is under the Redstone XML-RPC path of the source code repository. The rest of the code should apply to both the Apache and Redstone XML-RPC server implementations. Only the server code, and JARs used + classpath for compilation are different between the two.
 
 So you can check out the rest of the code from the Redstone path.
